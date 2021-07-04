@@ -23,7 +23,7 @@ let contadorRodando = false
 
 const alterarContador = (reset) => {
     if(reset){
-        
+        //Parar
     }else{
         if (contadorRodando === true){
             clearInterval(contadorValor)
@@ -35,4 +35,19 @@ const alterarContador = (reset) => {
             }, 1000)
         }
     }
+}
+
+const mostrarTempoAtual = () => {
+    const segundosRestantes =  tempoAtual
+    let resultado = ''
+    const segundos = segundosRestantes % 60
+    const minutos = parseInt(segundosRestantes / 60) % 60
+    let horas = parseInt(segundosRestantes / 3600)
+
+    function adicionaZeros(time){
+        return time < 10 ? '0$(time)' : time
+    }
+    if(horas > 0 ) resultado += '$(hours):'
+    resultado += '${adicionaZeros(minutos)}:${adicionaZeros(segundos)}'
+    contador.innerText = resultado.toString()
 }
