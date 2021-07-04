@@ -23,7 +23,7 @@ let contadorRodando = false
 
 const alterarContador = (reset) => {
     if(reset){
-        //Parar
+        pararContador()
     }else{
         if (contadorRodando === true){
             clearInterval(contadorValor)
@@ -50,4 +50,11 @@ const mostrarTempoAtual = () => {
     if(horas > 0 ) resultado += '$(hours):'
     resultado += '${adicionaZeros(minutos)}:${adicionaZeros(segundos)}'
     contador.innerText = resultado.toString()
+}
+
+const pararContador = () => {
+    clearInterval(contadorValor)
+    contadorRodando = false
+    tempoAtual = tempoTotal
+    mostrarTempoAtual()
 }
