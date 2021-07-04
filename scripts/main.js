@@ -1,4 +1,6 @@
 const contador = document.querySelector('#contador')
+const modoTexto = document.querySelector('#modoTexto')
+
 const btnIniciar = document.querySelector('#btnIniciar')
 const btnPausar = document.querySelector('#btnPausar')
 const btnParar = document.querySelector('#btnParar')
@@ -16,11 +18,12 @@ btnParar.addEventListener('click', () => {
     alterarContador(true)
 })
 
-let tempoTotal = 1500
-let tempoAtual = 1500
-let tempoIntervalo = 300
+let tempoTotal = 5
+let tempoAtual = 5
+let tempoIntervalo = 5
 
 let contadorRodando = false
+let modo = 'Trabalhar'
 
 const alterarContador = (reset) => {
     if (reset) {
@@ -32,7 +35,7 @@ const alterarContador = (reset) => {
         } else {
             contadorRodando = true
             contadorValor = setInterval(() => {
-                tempoAtual--
+                alternarModo()
                 mostrarTempoAtual()
             }, 1000)
         }
@@ -62,3 +65,22 @@ const pararContador = () => {
     tempoAtual = tempoTotal
     mostrarTempoAtual()
 }
+
+const alternarModo = () => {
+    if (tempoAtual > 0){
+        tempoAtual--
+    } else if (tempoAtual === 0){
+        if(modo === 'Trabalhar'){
+            tempoAtual = tempoIntervalo
+            modoTexto.innerText = 'Trabalhar'
+            modo = 'Intervalo'
+        }else{
+            tempoAtual = tempoTotal
+            modoTexto.innerText = 'Intervalo'
+            modo = 'Trabalhar'
+        }
+    }
+    mostrarTempoAtual()
+}
+
+mostrarTempoAtual()
