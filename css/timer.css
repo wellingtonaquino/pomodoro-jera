@@ -27,10 +27,14 @@ button{
     border-radius: 8px;
     color: #ffffff;
     font-weight: 400;
+    height: 30px;
+    width: 80px;
+    /*
     padding:10px 20px;
+    */
 }
 
 .contador{
-    font-size: 50px;
+    font-size: 65px;
     font-weight: 600;
 }
