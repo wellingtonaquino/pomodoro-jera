@@ -5,6 +5,7 @@ const btnParar = document.querySelector('#btnParar')
 
 btnIniciar.addEventListener('click', () => {
     alterarContador()
+    console.log('teste')
 })
 
 btnPausar.addEventListener('click', () => {
@@ -12,7 +13,7 @@ btnPausar.addEventListener('click', () => {
 })
 
 btnParar.addEventListener('click', () => {
-    alterarContadorr(true)
+    alterarContador(true)
 })
 
 let tempoTotal = 1500
@@ -22,33 +23,36 @@ let tempoIntervalo = 300
 let contadorRodando = false
 
 const alterarContador = (reset) => {
-    if(reset){
+    if (reset) {
         pararContador()
-    }else{
-        if (contadorRodando === true){
+    } else {
+        if (contadorRodando === true) {
             clearInterval(contadorValor)
             contadorRodando = false
-        }else{
+        } else {
             contadorRodando = true
             contadorValor = setInterval(() => {
                 tempoAtual--
+                mostrarTempoAtual()
             }, 1000)
         }
     }
 }
 
 const mostrarTempoAtual = () => {
-    const segundosRestantes =  tempoAtual
+    const segundosRestantes = tempoAtual
     let resultado = ''
     const segundos = segundosRestantes % 60
     const minutos = parseInt(segundosRestantes / 60) % 60
     let horas = parseInt(segundosRestantes / 3600)
 
-    function adicionaZeros(time){
-        return time < 10 ? '0$(time)' : time
+    function adicionaZeros(time) {
+        return time < 10 ? `0${time}` : time
     }
-    if(horas > 0 ) resultado += '$(hours):'
-    resultado += '${adicionaZeros(minutos)}:${adicionaZeros(segundos)}'
+    if (horas > 0) resultado += `${hours}:`
+
+    resultado += `${adicionaZeros(minutos)}:${adicionaZeros(segundos)}`
+
     contador.innerText = resultado.toString()
 }
 

@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/timer.css">
-    <script src="js/main.js" defer></script>
+    <script src="scripts/main.js" defer></script>
     <title>Pomodoro Timer</title>
 </head>
+
 <body>
     <div class="body-organizer">
         <header>
@@ -16,13 +18,14 @@
         </header>
         <div class="timer">
             Description
-            <div class="contador"></div>
+            <div id="contador" class="contador">25:00</div>
             <div class="controles">
-                <button class="btnIniciar">Iniciar</button>
-                <button class="btnPausar">Pausar</button>
-                <button class="btnParar">Parar</button>
+                <button id="btnIniciar" class="btnIniciar">Iniciar</button>
+                <button id="btnPausar" class="btnPausar">Pausar</button>
+                <button id="btnParar" class="btnParar">Parar</button>
             </div>
         </div>
     </div>
 </body>
+
 </html>
