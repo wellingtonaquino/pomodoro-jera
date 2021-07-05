@@ -17,6 +17,13 @@
     
 }
 
+.inputAlterartempo{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 button{
     text-align: center;
     text-decoration: none;
@@ -39,13 +46,34 @@ button{
     font-weight: 600;
 }
 
-#conta{
+input{
+    margin: 0 auto;
     background-color: transparent;
     border: 1px solid lightgrey;
 
     border-radius: 8px;
+
     color: #ffffff;
-    font-weight: 400;
+    font-size: 20px;
+    text-align: center;
     height: 30px;
-    width: 80px;
+    width: 100px;
+}
+
+input::placeholder{
+    color: lightgrey;
+    text-align: center;
+}
+label{
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+#modoTexto{
+    padding: 10px 0px 0px 0px;
+}
+
+#alterarTexto{
+    margin-bottom: 10px;
 }
