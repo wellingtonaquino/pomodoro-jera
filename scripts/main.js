@@ -23,9 +23,9 @@ btnParar.addEventListener('click', () => {
     alterarContador(true)
 })
 
-let tempoTotal = 10
-let tempoAtual = 10
-let tempoIntervalo = 5
+let tempoTotal = 1500
+let tempoAtual = 1500
+let tempoIntervalo = 300
 
 let contadorRodando = false
 let modo = 'Trabalhar'
@@ -58,9 +58,7 @@ const alterarContador = (reset) => {
             if (modo === 'Trabalhar' && novoTempoAtual != 0) {
                 tempoAtual = novoTempoAtual
                 console.log(novoTempoAtual)
-            } else {
-                tempoAtual = tempoIntervalo
-            }
+            } 
             
             contadorValor = setInterval(() => {
                 alternarModo()
@@ -91,7 +89,7 @@ const pararContador = () => {
     contadorRodando = false
     tempoAtual = tempoTotal
     mostrarTempoAtual()
-    
+
     //Alerta na Aplicação
     var audio = new Audio("song/alerta.mp3");
     audio.play();
@@ -113,7 +111,7 @@ const alternarModo = () => {
             modo = 'Intervalo'
             qtdpomodoro.innerText = 'Promodoros: ' + ++pomodoros
 
-            if (pomodoros == 2) {
+            if (pomodoros == 4) {
                 var res = confirm("Alterar tempo de intervalo para 10 minutos? ")
                 res === true ? tempoIntervalo = 600 : tempoIntervalo = 300
             }
