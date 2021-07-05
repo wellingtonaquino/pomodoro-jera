@@ -32,13 +32,18 @@ let modo = 'Trabalhar'
 let player = 'Iniciar'
 let pomodoros = 0
 
-let novoTempoAtual
-let imputTempoAtual = document.querySelector('#imputTempoAtual')
-imputTempoAtual.value = 1
+let novoTempoAtual = 0
+let inputTempoAtual = document.querySelector('#inputTempoAtual')
 
-imputTempoAtual.addEventListener('input', () => {
-    novoTempoAtual = imputTempoAtual.value * 60
+const minuteToSeconds = (mins) => {
+    return mins * 60
+  }
+
+inputTempoAtual.addEventListener('input', () => {
+    novoTempoAtual = Number(inputTempoAtual.value) * 60
 })
+
+
 
 const alterarContador = (reset) => {
     if (reset) {
@@ -49,9 +54,16 @@ const alterarContador = (reset) => {
             contadorRodando = false
         } else {
             contadorRodando = true
+            
+            if (modo === 'Trabalhar' && novoTempoAtual != 0) {
+                tempoAtual = novoTempoAtual
+                console.log(novoTempoAtual)
+            } else {
+                tempoAtual = tempoIntervalo
+            }
+            
             contadorValor = setInterval(() => {
                 alternarModo()
-                //mostrarTempoAtual()
             }, 1000)
         }
     }
@@ -79,7 +91,7 @@ const pararContador = () => {
     contadorRodando = false
     tempoAtual = tempoTotal
     mostrarTempoAtual()
-
+    
     //Alerta na Aplicação
     var audio = new Audio("song/alerta.mp3");
     audio.play();
