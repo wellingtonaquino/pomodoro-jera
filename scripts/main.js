@@ -1,3 +1,5 @@
+Notification.requestPermission();
+
 const contador = document.querySelector('#contador')
 const modoTexto = document.querySelector('#modoTexto')
 
@@ -10,10 +12,6 @@ btnIniciar.addEventListener('click', () => {
 })
 
 btnPausar.addEventListener('click', () => {
-    alterarContador()
-})
-
-btnIntervalo.addEventListener('click', () => {
     alterarContador()
 })
 
@@ -67,6 +65,11 @@ const pararContador = () => {
     contadorRodando = false
     tempoAtual = tempoTotal
     mostrarTempoAtual()
+    //Alerta na Aplicação
+    var audio = new Audio("song/alerta.mp3");
+    audio.play();
+    //Notificação na Plataforma
+    notificar('Seu timer acabou!','icon/icontomate.png','Pomodoro Timer')
 }
 
 const alternarModo = () => {
@@ -88,3 +91,13 @@ const alternarModo = () => {
 }
 
 mostrarTempoAtual()
+
+function notificar(corpo,icone,titulo) {
+    var opcoes = {
+        body: corpo,
+        icon: icone
+    }
+    var n = new Notification(titulo,opcoes);
+  }
+
+
