@@ -38,3 +38,14 @@ button{
     font-size: 65px;
     font-weight: 600;
 }
+
+#conta{
+    background-color: transparent;
+    border: 1px solid lightgrey;
+
+    border-radius: 8px;
+    color: #ffffff;
+    font-weight: 400;
+    height: 30px;
+    width: 80px;
+}

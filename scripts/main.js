@@ -2,17 +2,21 @@ Notification.requestPermission();
 
 const contador = document.querySelector('#contador')
 const modoTexto = document.querySelector('#modoTexto')
+const qtdpomodoro = document.querySelector('#qtdpomodoro')
 
 const btnIniciar = document.querySelector('#btnIniciar')
-const btnPausar = document.querySelector('#btnPausar')
 const btnParar = document.querySelector('#btnParar')
 
 btnIniciar.addEventListener('click', () => {
     alterarContador()
-})
+    if (player === 'Iniciar') {
+        btnIniciar.innerText = 'Pausar'
+        player = 'Pausar'
+    } else {
+        btnIniciar.innerText = 'Iniciar'
+        player = 'Iniciar'
+    }
 
-btnPausar.addEventListener('click', () => {
-    alterarContador()
 })
 
 btnParar.addEventListener('click', () => {
@@ -25,6 +29,16 @@ let tempoIntervalo = 5
 
 let contadorRodando = false
 let modo = 'Trabalhar'
+let player = 'Iniciar'
+let pomodoros = 0
+
+let novoTempoAtual
+let imputTempoAtual = document.querySelector('#imputTempoAtual')
+imputTempoAtual.value = 1
+
+imputTempoAtual.addEventListener('input', () => {
+    novoTempoAtual = imputTempoAtual.value * 60
+})
 
 const alterarContador = (reset) => {
     if (reset) {
@@ -65,23 +79,34 @@ const pararContador = () => {
     contadorRodando = false
     tempoAtual = tempoTotal
     mostrarTempoAtual()
+
     //Alerta na Aplicação
     var audio = new Audio("song/alerta.mp3");
     audio.play();
     //Notificação na Plataforma
-    notificar('Seu timer acabou!','icon/icontomate.png','Pomodoro Timer')
+    notificar('Seu timer acabou!', 'icon/icontomate.png', 'Pomodoro Timer')
 }
 
 const alternarModo = () => {
-    if (tempoAtual > 0){
+    if (tempoAtual > 0) {
         tempoAtual--
-    } else if (tempoAtual === 0){
+    } else if (tempoAtual === 0) {
         pararContador()
-        if(modo === 'Trabalhar'){
-            tempoAtual = tempoIntervalo
+
+        btnIniciar.innerText = 'Iniciar'
+        player = 'Iniciar'
+
+        if (modo === 'Trabalhar') {
             modoTexto.innerText = 'Intervalo'
             modo = 'Intervalo'
-        }else{
+            qtdpomodoro.innerText = 'Promodoros: ' + ++pomodoros
+
+            if (pomodoros == 2) {
+                var res = confirm("Alterar tempo de intervalo para 10 minutos? ")
+                res === true ? tempoIntervalo = 600 : tempoIntervalo = 300
+            }
+            tempoAtual = tempoIntervalo
+        } else {
             tempoAtual = tempoTotal
             modoTexto.innerText = 'Trabalhar'
             modo = 'Trabalhar'
@@ -92,12 +117,12 @@ const alternarModo = () => {
 
 mostrarTempoAtual()
 
-function notificar(corpo,icone,titulo) {
+function notificar(corpo, icone, titulo) {
     var opcoes = {
         body: corpo,
         icon: icone
     }
-    var n = new Notification(titulo,opcoes);
-  }
+    var n = new Notification(titulo, opcoes);
+}
 
 
