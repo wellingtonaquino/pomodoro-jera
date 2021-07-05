@@ -23,7 +23,7 @@ btnParar.addEventListener('click', () => {
     alterarContador(true)
 })
 
-let tempoTotal = 1500
+let tempoTotal = 1500  
 let tempoAtual = 1500
 let tempoIntervalo = 300
 
@@ -47,7 +47,7 @@ inputTempoAtual.addEventListener('input', () => {
 
 const alterarContador = (reset) => {
     if (reset) {
-        pararContador()
+        resetarContador()
     } else {
         if (contadorRodando === true) {
             clearInterval(contadorValor)
@@ -57,6 +57,7 @@ const alterarContador = (reset) => {
             
             if (modo === 'Trabalhar' && novoTempoAtual != 0) {
                 tempoAtual = novoTempoAtual
+                tempoTotal = novoTempoAtual
                 console.log(novoTempoAtual)
             } 
             
@@ -84,10 +85,35 @@ const mostrarTempoAtual = () => {
     contador.innerText = resultado.toString()
 }
 
+const resetarContador = () => {
+    clearInterval(contadorValor)
+    contadorRodando = false
+
+    btnIniciar.innerText = 'Iniciar'
+    player = 'Iniciar'
+
+    modoTexto.innerText = 'Trabalhar'
+    modo = 'Trabalhar'
+
+    qtdpomodoro.innerText = ''
+    pomodoros = 0
+
+    tempoAtual = tempoTotal
+    mostrarTempoAtual()
+
+    //Alerta na Aplicação
+    var audio = new Audio("song/alerta.mp3");
+    audio.play();
+}
+
 const pararContador = () => {
     clearInterval(contadorValor)
     contadorRodando = false
     tempoAtual = tempoTotal
+
+    btnIniciar.innerText = 'Iniciar'
+    player = 'Iniciar'
+
     mostrarTempoAtual()
 
     //Alerta na Aplicação
@@ -102,9 +128,6 @@ const alternarModo = () => {
         tempoAtual--
     } else if (tempoAtual === 0) {
         pararContador()
-
-        btnIniciar.innerText = 'Iniciar'
-        player = 'Iniciar'
 
         if (modo === 'Trabalhar') {
             modoTexto.innerText = 'Intervalo'
